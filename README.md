@@ -1,195 +1,160 @@
-# 🏆 Promiedos Dashboard Pro
+🏆 Panel de control Promiedos
+Un panel integral de análisis y predicción de apuestas deportivas diseñado para la toma de decisiones basada en datos. Esta herramienta combina algoritmos avanzados con gestión de riesgos en tiempo real para ayudar a los apostadores a identificar oportunidades de valor y optimizar su estrategia de financiación.
 
-A comprehensive sports betting analysis and prediction dashboard designed for data-driven decision making. This tool combines advanced algorithms with real-time risk management to help bettors identify value opportunities and optimize their bankroll strategy.
+🎯 Descripción general
+Promiedos Dashboard Pro es una plataforma de nivel profesional que analiza partidos de fútbol utilizando múltiples algoritmos predictivos, calcula el tamaño óptimo de las apuestas a través del Criterio de Kelly y proporciona alertas de anomalías completas. El panel procesa estadísticas del equipo, datos históricos de desempeño y movimientos del mercado para generar recomendaciones de apuestas prácticas.
 
-## 🎯 Overview
+✨ Características clave
+1. Algoritmos predictivos
+Algoritmo ELO: Sistema de calificación inspirado en el ajedrez adaptado al fútbol, que calcula las probabilidades de victoria en función de los puntos promedio históricos
+Algoritmo MINIMAX: Enfoque conservador que pondera más el desempeño reciente que los promedios históricos
+Puntuación de confianza para la confiabilidad de la predicción
+2. Indicador de apuestas de valor
+Identifica apuestas mal valoradas donde probabilidad implícita < probabilidad real
+Calcula el valor esperado (EV) para cada opción de apuesta
+Destaca las oportunidades de apuestas con un rendimiento esperado positivo
+3. Análisis avanzado
+Análisis de objetivos: Predicciones superiores o inferiores a 2,5 con correlaciones históricas
+Análisis marginal: Objetivos de la primera/segunda mitad, estimaciones de posesión, métricas de volatilidad
+Tipología de equipos: Clasificaciones (simétricas/equilibradas, defensivas/ofensivas, etc.)
+Medidor de riesgos: Mediciones de volatilidad y consistencia para cada equipo
+4. Sugerencia de Parlay
+Genera combinaciones óptimas de apuestas múltiples
+Calcula probabilidades acumuladas y probabilidades totales
+Análisis de la relación riesgo/recompensa para cada parlay
+Puntuación de valor esperado para sugerencias de clasificación
+5. Calculadora de criterios de Kelly
+Determina el porcentaje óptimo de bankroll por apuesta
+Admite estrategias de Kelly completas y Kelly fraccionadas (1/2 Kelly, 1/4 Kelly)
+Previene apuestas excesivas y pérdidas catastróficas
+Recomendaciones de gestión de fondos
+6. Centro de alertas de anomalías
+Cambios en las cuotas: Detecta movimientos drásticos de probabilidades que indican información del mercado
+Informes de lesiones: Monitorea las lesiones de jugadores clave y su impacto
+Cambios de formación: Identifica ajustes tácticos que pueden afectar las predicciones
+Resultados inesperados: Fallos en la predicción de banderas para la recalibración del modelo
+7. Panel de rendimiento
+Historial de predicciones con seguimiento de precisión
+Métricas de calibración del modelo (índice de Sharpe, ROI, reducción máxima)
+Análisis del rendimiento de los fondos bancarios
+Cálculos de tasa de victorias
+8. Próximos partidos
+Calendario interactivo de partidos de TheSportsDB
+Filtrado en tiempo real por liga, equipo y estado
+Análisis con un solo clic para cualquier partido
+Resumen rápido de partidos seleccionados
+📊 Secciones del panel de control
+Pestaña del panel de control
+Clasificación actual de la liga con estadísticas completas
+Tarjetas de estadísticas rápidas (líder, goles totales, comparación de partidos)
+Selector de equipo en tiempo real para análisis
+Pestaña de predicción
+Comparación lado a lado de las predicciones de ELO y MINIMAX
+Distribución de probabilidad de victoria/empate/pérdida
+Puntuación de confianza para cada algoritmo
+Pestaña Tendencias
+Análisis de la forma del equipo (mejora/estabilidad/declinación)
+Rutas ganadoras recientes
+Promedio de goles por partido
+Últimos 5 puntos de partido
+Pestaña de recomendaciones
+La mejor apuesta del día con razonamiento detallado
+Tabla completa de opciones de apuestas
+Puntuaciones de confianza y cálculos de valores
+Pestaña de apuestas de valor
+Identifica oportunidades mal valoradas
+Porcentaje de valor por encima de la probabilidad del mercado
+Opciones de apuestas recomendadas
+Pestaña de análisis de objetivos
+Más/menos de 2,5 estadísticas por equipo
+Tabla de correlación histórica
+Visualización de tendencias de 10 coincidencias
+Análisis de parejas para enfrentamientos con puntuaciones altas
+Pestaña Marginales
+Predicciones de objetivos para la primera y segunda mitad
+Estimaciones del porcentaje de posesión
+Índice de riesgo y análisis de dispersión
+Clasificación del perfil del equipo
+Pestaña del suggester de Parlay
+Las 6 mejores apuestas combinadas recomendadas clasificadas por EV
+Cálculos de probabilidad, probabilidades y recompensas
+Relación riesgo/recompensa para cada combinación
+Análisis detallado de vehículos eléctricos
+Pestaña Panel de riesgos
+Cálculos porcentuales del criterio de Kelly
+Sugerencias de gestión de fondos
+Tabla de dimensionamiento de apuestas óptimas
+Precisión de predicción histórica
+Métricas de rendimiento (ROI, índice de Sharpe, reducción máxima)
+Pestaña de alertas
+Niveles de gravedad críticos/de advertencia/de información
+Alertas de movimiento de cuotas
+Informes de lesiones
+Notificaciones de cambio de formación
+Anomalías de resultados
+Acciones recomendadas por alerta
+🚀 Cómo utilizar
+Inicio rápido
+Abra el archivo HTML en un navegador web moderno
+Seleccione equipo local (LOCAL) y equipo visitante (VISITANTE)
+Explore las pestañas para analizar el partido
+Revise la recomendación de la mejor apuesta
+Consulte el criterio de Kelly para conocer el tamaño óptimo de las apuestas
+Verifique las alertas de anomalías antes de realizar apuestas
+Ejemplo de flujo de trabajo
+Panel de control → Revisar clasificaciones y estadísticas del equipo
+Predicción → Comparar algoritmos ELO vs MINIMAX
+Apuestas de valor → Encuentra oportunidades con precios incorrectos
+Criterio de Kelly → Determinar el monto óptimo de la apuesta
+Alertas → Verificar lesiones, cambios de formación, novedades
+Sugerencia de Parlay → Considere combinaciones de apuestas múltiples
+Apuesta de lugar → Utilice las recomendaciones sabiamente
+Controles clave
+Menús desplegables del equipo: Seleccione equipos locales y visitantes
+Botones de navegación: Cambiar entre pestañas de análisis
+Descargar CSV: Datos de clasificaciones de exportación
+Actualización automática: Habilitar/deshabilitar actualizaciones automáticas (cada 5 minutos)
+Mesa de accesorios: Haga clic en cualquier coincidencia para cargar el análisis completo
+📈 Comprensión de conceptos clave
+Criterio de Kelly
+Fórmula: f* = (b × p - q) / b
 
-Promiedos Dashboard Pro is a professional-grade platform that analyzes football matches using multiple predictive algorithms, calculates optimal bet sizing through the Kelly Criterion, and provides comprehensive anomaly alerts. The dashboard processes team statistics, historical performance data, and market movements to generate actionable betting recommendations.
+f* = fracción óptima de fondos a apostar
+p = probabilidad de ganar
+q = 1 - p (probabilidad de perder)
+b = probabilidades - 1
+Ejemplo: Con un 60% de probabilidad de victoria y 2,0 probabilidades:
 
-## ✨ Key Features
+Kelly = (1 × 0,60 - 0,40) / 1 = 0,20 (20%)
+Apueste el 20% de sus fondos para lograr el máximo crecimiento
+Utilice 1/2 Kelly (10%) para un enfoque más conservador
+Valor esperado (EV)
+EV = (Probability × Profit) - ((1 - Probability) × Loss)
 
-### 1. **Predictive Algorithms**
-- **ELO Algorithm**: Chess-inspired rating system adapted for football, calculating win probabilities based on historical average points
-- **MINIMAX Algorithm**: Conservative approach that weighs recent performance more heavily than historical averages
-- Confidence scoring for prediction reliability
-
-### 2. **Value Betting Indicator**
-- Identifies mispriced bets where implied probability < actual probability
-- Calculates expected value (EV) for each betting option
-- Highlights betting opportunities with positive expected return
-
-### 3. **Advanced Analytics**
-- **Goals Analysis**: Over/Under 2.5 predictions with historical correlations
-- **Marginal Analysis**: First half/second half goals, possession estimates, volatility metrics
-- **Team Typology**: Classifications (Symmetric/Balanced, Defensive/Offensive, etc.)
-- **Risk Meter**: Volatility and consistency measurements for each team
-
-### 4. **Parlay Suggester**
-- Generates optimal multi-bet combinations
-- Calculates cumulative probabilities and total odds
-- Risk/Reward ratio analysis for each parlay
-- Expected Value scoring for ranking suggestions
-
-### 5. **Kelly Criterion Calculator**
-- Determines optimal bankroll percentage per bet
-- Supports full Kelly and fractional Kelly strategies (1/2 Kelly, 1/4 Kelly)
-- Prevents overbetting and catastrophic losses
-- Bankroll management recommendations
-
-### 6. **Anomaly Alerts Center**
-- **Quota Changes**: Detects drastic odds movements indicating market information
-- **Injury Reports**: Monitors key player injuries and their impact
-- **Formation Changes**: Identifies tactical adjustments that may affect predictions
-- **Unexpected Results**: Flags prediction misses for model recalibration
-
-### 7. **Performance Dashboard**
-- Prediction history with accuracy tracking
-- Model calibration metrics (Sharpe ratio, ROI, max drawdown)
-- Bankroll performance analysis
-- Win rate calculations
-
-### 8. **Upcoming Matches**
-- Interactive fixture calendar from TheSportsDB
-- Real-time filtering by league, team, and status
-- One-click analysis for any match
-- Quick summary for selected matches
-
-## 📊 Dashboard Sections
-
-### Dashboard Tab
-- Current league standings with comprehensive statistics
-- Quick stats cards (leader, total goals, match comparison)
-- Real-time team selector for analysis
-
-### Prediction Tab
-- Side-by-side comparison of ELO and MINIMAX predictions
-- Win/draw/loss probability distribution
-- Confidence scoring for each algorithm
-
-### Trends Tab
-- Team form analysis (improving/stable/declining)
-- Recent winning streaks
-- Average goals per match
-- Last 5 matches points
-
-### Recommendations Tab
-- Best bet of the day with detailed reasoning
-- Complete betting options table
-- Confidence scores and value calculations
-
-### Value Betting Tab
-- Identifies mispriced opportunities
-- Value percentage above market probability
-- Recommended betting options
-
-### Goals Analysis Tab
-- Over/Under 2.5 statistics per team
-- Historical correlation table
-- 10-match trend visualization
-- Pair analysis for high-scoring matchups
-
-### Marginales Tab
-- First/second half goals predictions
-- Possession percentage estimates
-- Risk index and dispersal analysis
-- Team profile classification
-
-### Parlay Suggester Tab
-- Top 6 recommended parlays ranked by EV
-- Probability, odds, and reward calculations
-- Risk/Reward ratio for each combination
-- Detailed EV analysis
-
-### Risk Dashboard Tab
-- Kelly Criterion percentage calculations
-- Bankroll management suggestions
-- Optimal bet sizing table
-- Historical prediction accuracy
-- Performance metrics (ROI, Sharpe ratio, max drawdown)
-
-### Alerts Tab
-- Critical/Warning/Info severity levels
-- Quota movement alerts
-- Injury reports
-- Formation change notifications
-- Result anomalies
-- Recommended actions per alert
-
-## 🚀 How to Use
-
-### Quick Start
-1. Open the HTML file in a modern web browser
-2. Select home team (LOCAL) and away team (VISITANTE)
-3. Browse through tabs to analyze the match
-4. Review the best bet recommendation
-5. Check Kelly Criterion for optimal bet sizing
-6. Verify anomaly alerts before placing bets
-
-### Workflow Example
-1. **Dashboard** → Review standings and team stats
-2. **Prediction** → Compare ELO vs MINIMAX algorithms
-3. **Value Betting** → Find mispriced opportunities
-4. **Kelly Criterion** → Determine optimal bet amount
-5. **Alerts** → Check for injuries, formation changes, news
-6. **Parlay Suggester** → Consider multi-bet combinations
-7. **Place Bet** → Use recommendations wisely
-
-### Key Controls
-- **Team Dropdowns**: Select local and away teams
-- **Navigation Buttons**: Switch between analysis tabs
-- **Download CSV**: Export standings data
-- **Auto-Refresh**: Enable/disable automatic updates (every 5 minutes)
-- **Fixture Table**: Click any match to load full analysis
-
-## 📈 Understanding Key Concepts
-
-### Kelly Criterion
-Formula: `f* = (b × p - q) / b`
-- **f*** = optimal fraction of bankroll to bet
-- **p** = probability of winning
-- **q** = 1 - p (probability of losing)
-- **b** = odds - 1
-
-**Example**: With 60% win probability and 2.0 odds:
-- Kelly = (1 × 0.60 - 0.40) / 1 = 0.20 (20%)
-- Bet 20% of bankroll for maximum growth
-- Use 1/2 Kelly (10%) for more conservative approach
-
-### Expected Value (EV)
-`EV = (Probability × Profit) - ((1 - Probability) × Loss)`
-- Positive EV = long-term profitability expected
-- Only bet when EV > 0
-- Larger positive EV = better opportunity
-
-### Over/Under 2.5
-- **Over 2.5**: Match ends with 3+ goals
-- **Under 2.5**: Match ends with 0, 1, or 2 goals
-- Key metric for high/low-scoring predictions
-
-### Parlay (Acumulador)
-- Multiple bets where profit from one funds the next
-- Higher odds but requires all predictions correct
-- Risk/Reward: 2:1 means $2 profit per $1 risked
-
-## 🛠️ Technologies Used
-
-- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
-- **Charting**: Chart.js 3.9.1
-- **Data**: Simulated realistic football statistics
-- **Algorithms**: ELO, MINIMAX, Kelly Criterion
-- **UI Framework**: Custom dark-themed component system
-- **Data Source**: TheSportsDB API integration ready
-
-## 💻 System Requirements
-
-- Modern web browser (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+)
-- JavaScript enabled
-- No backend server required (runs locally)
-- ~2MB disk space for HTML file
-
-## 📁 File Structure
-
-```
+EV positivo = rentabilidad esperada a largo plazo
+Apuesta solo cuando EV > 0
+Vehículo eléctrico positivo más grande = mejor oportunidad
+Más/menos de 2,5
+Más de 2,5: El partido termina con 3+ goles
+Menos de 2,5: El partido termina con 0, 1 o 2 goles
+Métrica clave para predicciones de puntuación alta/baja
+Parlay (Acumulador)
+Múltiples apuestas donde el beneficio de una financia la siguiente
+Probabilidades más altas pero requiere que todas las predicciones sean correctas
+Riesgo/recompensa: 2:1 significa $2 de ganancia por cada $1 arriesgado
+🛠️ Tecnologías utilizadas
+Frontend: HTML5, CSS3, JavaScript (Vanilla)
+Fletamento: Chart.js 3.9.1
+Datos: Estadísticas de fútbol realistas simuladas
+Algoritmos: ELO, MINIMAX, Criterio de Kelly
+Marco de interfaz de usuario: Sistema de componentes personalizado de temática oscura
+Fuente de datos: La integración de la API de TheSportsDB está lista
+💻 Requisitos del sistema
+Navegador web moderno (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+)
+JavaScript habilitado
+No se requiere servidor backend (se ejecuta localmente)
+~2 MB de espacio en disco para archivo HTML
+📁 Estructura del archivo
 promiedos_dark_dashboard4.html
 ├── HEAD
 │   ├── Meta tags
@@ -213,143 +178,113 @@ promiedos_dark_dashboard4.html
 │   │   ├── Help
 │   │   └── Upcoming Matches
 │   └── JavaScript logic
-```
+⚙️ Configuración
+Personalización de datos
+Editar el standings matriz en la sección JavaScript para actualizar:
 
-## ⚙️ Configuration
+Clasificación de equipos
+Puntos por partido (ptos_prom)
+Goles a favor/en contra
+Registros de ganancias/sorteos/pérdidas
+Historial del partido
+Modificar el matchHistory objeto a incluir:
 
-### Data Customization
-Edit the `standings` array in the JavaScript section to update:
-- Team rankings
-- Points per match (ptos_prom)
-- Goals for/against
-- Win/draw/loss records
+Datos históricos de desempeño
+Patrones superiores o inferiores
+Estadísticas específicas del equipo
+Configuración de fondos
+Financiamiento predeterminado: $1000 (fácilmente modificado en updateRiskDashboard())
 
-### Match History
-Modify the `matchHistory` object to include:
-- Historical performance data
-- Over/Under patterns
-- Team-specific statistics
+📊 Detalles del algoritmo
+Cálculo ELO
+Normaliza la fuerza del equipo por promedio de puntos
+Pesa la fuerza proporcionalmente
+Genera una línea base de confianza del 85%
+Se adapta a las consideraciones sobre la ventaja de jugar en casa
+Clasificación MINIMAX
+Porcentaje de tasa de victorias: 40% de peso
+Promedio de puntos: 60% peso
+Multiplicador del equipo local: 1,15x
+Multiplicador del equipo visitante: 0,85x
+Más conservador que ELO
+⚠️Descargo de responsabilidad importante
+Propósito educativo: Utilice esta herramienta para aprender sobre análisis de apuestas, no para garantizar ganancias
+Precisión: Las predicciones son estimaciones probabilísticas, no certezas
+Gestión de riesgos: Utilice siempre el criterio de Kelly o una fracción del mismo
+Protección de fondos bancarios: Nunca apuestes más de lo que puedes permitirte perder
+Limitaciones del modelo: Basado en datos históricos; no tiene en cuenta eventos impredecibles
+Verificación: Alertas de referencias cruzadas con fuentes oficiales antes de apostar
+💡 Mejores prácticas
+✅ Do:
 
-### Bankroll Settings
-Default bankroll: $1,000 (easily modified in `updateRiskDashboard()`)
+Utilice 1/2 Kelly para una gestión de fondos más segura
+Verifique las alertas de anomalías con fuentes oficiales
+Realice un seguimiento de sus predicciones frente a los resultados reales
+Diversifique entre múltiples opciones de apuestas
+Revise la sección Ayuda periódicamente
+❌ Nu:
 
-## 📊 Algorithm Details
+Apuesta por cada predicción
+Utilice Kelly completo sin experiencia
+Ignore las alertas de lesiones/formación
+Persiga pérdidas con apuestas más grandes
+Confíe únicamente en un algoritmo
+🎓 Recursos de aprendizaje
+Pestaña de ayuda: Explicaciones completas de todas las características
+Información sobre herramientas: Pase el cursor sobre (?) iconos para definiciones rápidas
+Secciones de ejemplo: Cada pestaña incluye datos de muestra y cálculos
+Pantalla de fórmula: Se muestran modelos matemáticos para la transparencia
+🔄 Actualizaciones y mantenimiento
+Actualización automática: Activa o desactiva la barra lateral para obtener actualizaciones de 5 minutos
+Importación de datos: Listo para la integración de la API de TheSportsDB
+Exportación CSV: Descargar clasificaciones para análisis externo
+Caché del navegador: Los datos persisten durante la sesión
+👨‍💻 Notas para desarrolladores
+Estructura del código: Funciones modulares de JavaScript por característica
+Estilismo: Variables CSS para una fácil personalización del tema
+Sensible: Adaptación móvil incluida (oculta la barra lateral en <768px)
+Rendimiento: Optimizado para cálculos en tiempo real
+Extensibilidad: Listo para la integración de bases de datos y API
+🔐 Privacidad y datos
+Todo el procesamiento se realiza localmente en su navegador
+No se envían datos a servidores externos
+Sin cookies ni seguimiento
+Datos simulados para demostración
+Listo para la integración con API reales
+🚀 Mejoras futuras
+Integración de cuotas en tiempo real con API de apuestas
+Seguimiento de puntuaciones en vivo
+Notificaciones de alerta automatizadas
+Entrenamiento de modelos de aprendizaje automático
+Soporte multiliga
+Análisis a nivel de jugador
+Base de datos histórica
+Versión de la aplicación móvil
+Soporte multilingüe
+Gráficos avanzados
+📄 Licencia
+Este proyecto se proporciona tal cual con fines educativos y analíticos. Úselo a su propia discreción.
 
-### ELO Calculation
-- Normalizes team strength by points average
-- Weights strength proportionally
-- Generates 85% confidence baseline
-- Adapts for home advantage considerations
+🤝 Soporte
+Para solicitudes de funciones o informes de errores, documente el problema con:
 
-### MINIMAX Ranking
-- Win rate percentage: 40% weight
-- Points average: 60% weight
-- Home team multiplier: 1.15x
-- Away team multiplier: 0.85x
-- More conservative than ELO
+Sección del panel de control afectada
+Comportamiento esperado versus comportamiento real
+Navegador y versión utilizada
+Pasos para reproducir
+Versión: 4.0 (Dark Dashboard Pro)
+Última actualización: 2024
+Estado: Desarrollo Activo
+Compatibilidad: Todos los navegadores modernos
 
-## ⚠️ Important Disclaimers
-
-1. **Educational Purpose**: Use this tool for learning about betting analytics, not guarantee of profits
-2. **Accuracy**: Predictions are probabilistic estimates, not certainties
-3. **Risk Management**: Always use Kelly Criterion or fraction thereof
-4. **Bankroll Protection**: Never bet more than you can afford to lose
-5. **Model Limitations**: Based on historical data; doesn't account for unpredictable events
-6. **Verification**: Cross-reference alerts with official sources before betting
-
-## 💡 Best Practices
-
-✅ **Do:**
-- Use 1/2 Kelly for safer bankroll management
-- Verify anomaly alerts against official sources
-- Track your predictions vs. actual results
-- Diversify across multiple betting options
-- Review the Help section regularly
-
-❌ **Don't:**
-- Bet on every prediction
-- Use full Kelly without experience
-- Ignore injury/formation alerts
-- Chase losses with larger bets
-- Rely solely on one algorithm
-
-## 🎓 Learning Resources
-
-- **Help Tab**: Comprehensive explanations of all features
-- **Tooltips**: Hover over (?) icons for quick definitions
-- **Example Sections**: Each tab includes sample data and calculations
-- **Formula Display**: Mathematical models shown for transparency
-
-## 🔄 Updates & Maintenance
-
-- **Auto-Refresh**: Toggle in sidebar for 5-minute updates
-- **Data Import**: Ready for TheSportsDB API integration
-- **CSV Export**: Download standings for external analysis
-- **Browser Cache**: Data persists during session
-
-## 👨‍💻 Developer Notes
-
-- **Code Structure**: Modular JavaScript functions per feature
-- **Styling**: CSS variables for easy theme customization
-- **Responsive**: Mobile adaptation included (hides sidebar on <768px)
-- **Performance**: Optimized for real-time calculations
-- **Extensibility**: Ready for database and API integration
-
-## 🔐 Privacy & Data
-
-- All processing happens locally in your browser
-- No data sent to external servers
-- No cookies or tracking
-- Simulated data for demonstration
-- Ready for integration with real APIs
-
-## 🚀 Future Enhancements
-
-- [ ] Real-time odds integration with betting APIs
-- [ ] Live score tracking
-- [ ] Automated alert notifications
-- [ ] Machine learning model training
-- [ ] Multi-league support
-- [ ] Player-level analysis
-- [ ] Historical database
-- [ ] Mobile app version
-- [ ] Multi-language support
-- [ ] Advanced charting
-
-## 📄 License
-
-This project is provided as-is for educational and analytical purposes. Use at your own discretion.
-
-## 🤝 Support
-
-For feature requests or bug reports, document the issue with:
-- Dashboard section affected
-- Expected vs. actual behavior
-- Browser and version used
-- Steps to reproduce
-
----
-
-**Version**: 4.0 (Dark Dashboard Pro)  
-**Last Updated**: 2024  
-**Status**: Active Development  
-**Compatibility**: All modern browsers
-
----
-
-## Quick Reference
-
-| Feature | Purpose | Key Metric |
-|---------|---------|-----------|
-| ELO Algorithm | Baseline prediction | Confidence % |
-| Kelly Criterion | Optimal bet sizing | % of bankroll |
-| Value Betting | Find mispriced odds | EV % |
-| Parlay Suggester | Multi-bet combinations | Risk/Reward ratio |
-| Alerts | Anomaly detection | Severity level |
-| Goals Analysis | Over/Under prediction | % probability |
-| Marginales | Match profile | Team typology |
-| Bankroll Manager | Risk control | Max loss limit |
-
----
-
-**Happy analyzing! Bet responsibly. 🎯**
+Referencia rápida
+Característica	Propósito	Métrica clave
+Algoritmo ELO	Predicción de referencia	% de confianza
+Criterio de Kelly	Tamaño óptimo de la apuesta	% de los fondos
+Apuestas de valor	Encuentre probabilidades mal valoradas	EV %
+Sugerencia de Parlay	Combinaciones de apuestas múltiples	Relación riesgo/recompensa
+Alertas	Detección de anomalías	Nivel de gravedad
+Análisis de objetivos	Predicción excesiva o insuficiente	% probabilidad
+Marginales	Perfil de coincidencia	Tipología de equipos
+Administrador de fondos	Control de riesgos	Límite máximo de pérdida
+¡Feliz análisis! Apuesta responsablemente. 🎯
