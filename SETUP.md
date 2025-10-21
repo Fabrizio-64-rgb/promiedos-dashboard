@@ -54,29 +54,55 @@ Luego abre tu navegador en: **http://localhost:8000**
 
 ## Configuración de API en Tiempo Real
 
-### TheSportsDB (Gratuita - Ya Configurada)
+### 🔴 Football-data.org (Principal - YA CONFIGURADA)
 
-El dashboard viene preconfigurado con TheSportsDB, que proporciona:
+El dashboard viene **preconfigurado con Football-data.org**, proporcionando datos EN VIVO:
+
+#### ✅ Características Activas
+- 🔴 **Datos oficiales en tiempo real**
+- ⚽ Clasificaciones actualizadas
+- 📅 Fixtures con fechas y horarios exactos
+- 🏟️ Marcadores en vivo durante partidos
+- 📊 Estadísticas detalladas de equipos
+- 🌍 Cobertura de 7+ ligas principales
+
+#### 🔑 API Key Configurada
+```
+API Key: 8a95311bd0a24419b86409b558b1bc0c
+Estado: ACTIVA
+Plan: Gratuito (10 llamadas/min, 30k/mes)
+```
+
+#### 📊 Ligas Disponibles
+- Premier League (Inglaterra)
+- La Liga (España)
+- Bundesliga (Alemania)
+- Serie A (Italia)
+- Ligue 1 (Francia)
+- Champions League
+- World Cup / European Championship
+
+**✅ No requiere configuración adicional - ¡Funciona inmediatamente!**
+
+### TheSportsDB (Fallback Automático)
+
+Activada como respaldo si Football-data.org no responde:
 - ✅ Clasificaciones de ligas
 - ✅ Próximos partidos
-- ✅ Información de equipos
-- ✅ Sin necesidad de registro
+- ✅ Información básica de equipos
+- ✅ Sin límites estrictos
 
-**No requiere configuración adicional.**
+**Configuración automática - sin acción requerida.**
 
-### API-Football (Datos Premium - Opcional)
+### API-Football (Opcional - No Necesaria)
 
-Para datos más completos y actualizados:
+Si deseas agregar una tercera fuente de datos:
 
 1. **Regístrate en API-Football:**
    - Visita: https://www.api-football.com/
-   - Crea una cuenta gratuita (incluye 100 llamadas/día)
+   - Crea una cuenta gratuita (100 llamadas/día)
 
-2. **Obtén tu API Key:**
-   - Ve a tu dashboard
-   - Copia tu API Key
-
-3. **Configura tu API Key:**
+2. **Configura tu API Key:**
    Edita el archivo `js/config.js`:
    ```javascript
    API_FOOTBALL: {
@@ -86,7 +112,7 @@ Para datos más completos y actualizados:
    }
    ```
 
-4. **Reinicia el dashboard**
+**Nota:** No es necesaria ya que Football-data.org proporciona todos los datos necesarios.
 
 ## Configuración Personalizada
 

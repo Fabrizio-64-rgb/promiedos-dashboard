@@ -3,7 +3,21 @@
  */
 
 const CONFIG = {
-    // API de TheSportsDB (gratuita)
+    // API PRINCIPAL: Football-data.org (DATOS EN VIVO)
+    FOOTBALL_DATA: {
+        API_KEY: '8a95311bd0a24419b86409b558b1bc0c',
+        BASE_URL: 'https://api.football-data.org/v4',
+        ENDPOINTS: {
+            COMPETITIONS: '/competitions',
+            STANDINGS: '/competitions/{id}/standings',
+            MATCHES: '/competitions/{id}/matches',
+            LIVE_MATCHES: '/matches',
+            TEAM: '/teams/{id}',
+            MATCH_DETAILS: '/matches/{id}'
+        }
+    },
+
+    // API de TheSportsDB (fallback)
     THESPORTSDB: {
         API_KEY: '3', // API Key gratuita
         BASE_URL: 'https://www.thesportsdb.com/api/v1/json',
@@ -17,9 +31,9 @@ const CONFIG = {
         }
     },
 
-    // API-Football (requiere registro gratuito en api-football.com)
+    // API-Football (fallback alternativo)
     API_FOOTBALL: {
-        API_KEY: '', // Agregar tu API key de api-football.com
+        API_KEY: '', // Agregar tu API key de api-football.com si deseas
         BASE_URL: 'https://v3.football.api-sports.io',
         ENDPOINTS: {
             FIXTURES: '/fixtures',
@@ -29,14 +43,26 @@ const CONFIG = {
         }
     },
 
-    // Ligas principales por defecto
+    // Ligas principales - IDs de Football-data.org
     DEFAULT_LEAGUES: {
-        PREMIER_LEAGUE: '4328',
-        LA_LIGA: '4335',
-        BUNDESLIGA: '4331',
-        SERIE_A: '4332',
-        LIGUE_1: '4334',
-        CHAMPIONS_LEAGUE: '4480'
+        PREMIER_LEAGUE: 'PL',      // 2021 - Premier League
+        LA_LIGA: 'PD',             // 2014 - Primera División
+        BUNDESLIGA: 'BL1',         // 2002 - Bundesliga
+        SERIE_A: 'SA',             // 2019 - Serie A
+        LIGUE_1: 'FL1',            // 2015 - Ligue 1
+        CHAMPIONS_LEAGUE: 'CL'     // 2001 - Champions League
+    },
+
+    // IDs numéricos de las competiciones
+    COMPETITION_IDS: {
+        PL: 2021,    // Premier League
+        PD: 2014,    // La Liga
+        BL1: 2002,   // Bundesliga
+        SA: 2019,    // Serie A
+        FL1: 2015,   // Ligue 1
+        CL: 2001,    // Champions League
+        WC: 2000,    // World Cup
+        EC: 2018     // European Championship
     },
 
     // Configuración de actualización

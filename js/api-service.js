@@ -1,5 +1,6 @@
 /**
- * Servicio de API para obtener datos de fútbol en tiempo real
+ * Servicio de API unificado para obtener datos de fútbol en tiempo real
+ * Prioridad: Football-data.org -> TheSportsDB -> Datos simulados
  */
 
 class FootballAPIService {
@@ -7,82 +8,179 @@ class FootballAPIService {
         this.cache = new Map();
         this.cacheExpiry = new Map();
         this.updateIntervals = new Map();
+        this.primaryAPI = 'football-data'; // API principal
+        this.apiStatus = {
+            'football-data': true,
+            'thesportsdb': true
+        };
     }
 
     /**
-     * Obtener clasificación de la liga
+     * Obtener clasificación de la liga (DATOS EN VIVO)
      */
     async getStandings(leagueId, season = null) {
         const cacheKey = `standings_${leagueId}_${season}`;
 
         if (this.isCacheValid(cacheKey)) {
+            console.log('📦 Using cached standings');
             return this.cache.get(cacheKey);
         }
 
         try {
-            // Intentar primero con TheSportsDB
-            const url = `${CONFIG.THESPORTSDB.BASE_URL}/${CONFIG.THESPORTSDB.API_KEY}${CONFIG.THESPORTSDB.ENDPOINTS.STANDINGS}?l=${leagueId}${season ? `&s=${season}` : ''}`;
-            const response = await fetch(url);
-            const data = await response.json();
-
-            if (data.table) {
-                const standings = this.normalizeStandings(data.table);
-                this.setCache(cacheKey, standings, 300000); // Cache por 5 minutos
-                return standings;
+            // PRIORIDAD 1: Intentar con Football-data.org (DATOS EN VIVO)
+            if (this.apiStatus['football-data'] && typeof footballDataService !== 'undefined') {
+                console.log('🔴 Fetching LIVE standings from Football-data.org...');
+                try {
+                    const standings = await footballDataService.getStandings(leagueId);
+                    this.setCache(cacheKey, standings, 300000); // Cache por 5 minutos
+                    console.log('✅ Live standings loaded successfully!');
+                    return standings;
+                } catch (error) {
+                    console.warn('⚠️ Football-data.org failed, trying fallback...', error);
+                    this.apiStatus['football-data'] = false;
+                    // Continuar con fallback
+                }
             }
 
-            // Si falla, usar datos simulados
+            // PRIORIDAD 2: Fallback a TheSportsDB
+            if (this.apiStatus['thesportsdb']) {
+                console.log('📡 Fetching from TheSportsDB (fallback)...');
+                try {
+                    const url = `${CONFIG.THESPORTSDB.BASE_URL}/${CONFIG.THESPORTSDB.API_KEY}${CONFIG.THESPORTSDB.ENDPOINTS.STANDINGS}?l=${leagueId}${season ? `&s=${season}` : ''}`;
+                    const response = await fetch(url);
+                    const data = await response.json();
+
+                    if (data.table) {
+                        const standings = this.normalizeStandings(data.table);
+                        this.setCache(cacheKey, standings, 300000);
+                        return standings;
+                    }
+                } catch (error) {
+                    console.warn('⚠️ TheSportsDB failed:', error);
+                    this.apiStatus['thesportsdb'] = false;
+                }
+            }
+
+            // PRIORIDAD 3: Usar datos simulados como último recurso
+            console.log('💾 Using simulated data (no API available)');
             return this.getSimulatedStandings();
+
         } catch (error) {
-            console.error('Error fetching standings:', error);
+            console.error('❌ Error fetching standings:', error);
             return this.getSimulatedStandings();
         }
     }
 
     /**
-     * Obtener próximos partidos
+     * Obtener próximos partidos (DATOS EN VIVO)
      */
     async getUpcomingFixtures(leagueId) {
         const cacheKey = `fixtures_${leagueId}`;
 
         if (this.isCacheValid(cacheKey)) {
+            console.log('📦 Using cached fixtures');
             return this.cache.get(cacheKey);
         }
 
         try {
-            const url = `${CONFIG.THESPORTSDB.BASE_URL}/${CONFIG.THESPORTSDB.API_KEY}${CONFIG.THESPORTSDB.ENDPOINTS.EVENTS}?id=${leagueId}`;
-            const response = await fetch(url);
-            const data = await response.json();
-
-            if (data.events) {
-                const fixtures = this.normalizeFixtures(data.events);
-                this.setCache(cacheKey, fixtures, 600000); // Cache por 10 minutos
-                return fixtures;
+            // PRIORIDAD 1: Football-data.org (DATOS EN VIVO)
+            if (this.apiStatus['football-data'] && typeof footballDataService !== 'undefined') {
+                console.log('🔴 Fetching LIVE fixtures from Football-data.org...');
+                try {
+                    const fixtures = await footballDataService.getUpcomingFixtures(leagueId);
+                    this.setCache(cacheKey, fixtures, 600000); // Cache por 10 minutos
+                    console.log('✅ Live fixtures loaded successfully!');
+                    return fixtures;
+                } catch (error) {
+                    console.warn('⚠️ Football-data.org failed for fixtures:', error);
+                    // Continuar con fallback
+                }
             }
 
+            // PRIORIDAD 2: TheSportsDB
+            if (this.apiStatus['thesportsdb']) {
+                console.log('📡 Fetching fixtures from TheSportsDB (fallback)...');
+                try {
+                    const url = `${CONFIG.THESPORTSDB.BASE_URL}/${CONFIG.THESPORTSDB.API_KEY}${CONFIG.THESPORTSDB.ENDPOINTS.EVENTS}?id=${leagueId}`;
+                    const response = await fetch(url);
+                    const data = await response.json();
+
+                    if (data.events) {
+                        const fixtures = this.normalizeFixtures(data.events);
+                        this.setCache(cacheKey, fixtures, 600000);
+                        return fixtures;
+                    }
+                } catch (error) {
+                    console.warn('⚠️ TheSportsDB failed for fixtures:', error);
+                }
+            }
+
+            // PRIORIDAD 3: Datos simulados
+            console.log('💾 Using simulated fixtures');
             return this.getSimulatedFixtures();
+
         } catch (error) {
-            console.error('Error fetching fixtures:', error);
+            console.error('❌ Error fetching fixtures:', error);
             return this.getSimulatedFixtures();
         }
     }
 
     /**
-     * Obtener marcadores en vivo
+     * Obtener marcadores en vivo (DATOS EN TIEMPO REAL)
      */
     async getLiveScores(league = null) {
         try {
-            const url = `${CONFIG.THESPORTSDB.BASE_URL}/${CONFIG.THESPORTSDB.API_KEY}${CONFIG.THESPORTSDB.ENDPOINTS.LIVE_SCORES}${league ? `?l=${league}` : ''}`;
-            const response = await fetch(url);
-            const data = await response.json();
+            // PRIORIDAD 1: Football-data.org (DATOS EN VIVO)
+            if (this.apiStatus['football-data'] && typeof footballDataService !== 'undefined') {
+                console.log('🔴 Fetching LIVE matches from Football-data.org...');
+                try {
+                    const liveMatches = await footballDataService.getLiveMatches(league);
+                    console.log(`✅ ${liveMatches.length} live matches found`);
+                    return liveMatches;
+                } catch (error) {
+                    console.warn('⚠️ Football-data.org failed for live scores:', error);
+                    // Continuar con fallback
+                }
+            }
 
-            if (data.events) {
-                return this.normalizeLiveScores(data.events);
+            // PRIORIDAD 2: TheSportsDB
+            if (this.apiStatus['thesportsdb']) {
+                console.log('📡 Fetching live scores from TheSportsDB (fallback)...');
+                try {
+                    const url = `${CONFIG.THESPORTSDB.BASE_URL}/${CONFIG.THESPORTSDB.API_KEY}${CONFIG.THESPORTSDB.ENDPOINTS.LIVE_SCORES}${league ? `?l=${league}` : ''}`;
+                    const response = await fetch(url);
+                    const data = await response.json();
+
+                    if (data.events) {
+                        return this.normalizeLiveScores(data.events);
+                    }
+                } catch (error) {
+                    console.warn('⚠️ TheSportsDB failed for live scores:', error);
+                }
             }
 
             return [];
+
         } catch (error) {
-            console.error('Error fetching live scores:', error);
+            console.error('❌ Error fetching live scores:', error);
+            return [];
+        }
+    }
+
+    /**
+     * Obtener partidos de hoy (NUEVO - DATOS EN VIVO)
+     */
+    async getTodayMatches(leagueId = null) {
+        try {
+            if (this.apiStatus['football-data'] && typeof footballDataService !== 'undefined') {
+                console.log('🔴 Fetching today\'s matches from Football-data.org...');
+                const matches = await footballDataService.getTodayMatches(leagueId);
+                console.log(`✅ ${matches.length} matches today`);
+                return matches;
+            }
+            return [];
+        } catch (error) {
+            console.error('❌ Error fetching today matches:', error);
             return [];
         }
     }
@@ -116,12 +214,32 @@ class FootballAPIService {
     }
 
     /**
-     * Obtener cuotas de apuestas (simuladas)
+     * Obtener cuotas de apuestas (mejoradas con estadísticas reales)
      */
-    async getOdds(eventId) {
-        // En producción, esto se conectaría a una API de cuotas real
-        // Por ahora, generamos cuotas simuladas basadas en probabilidades
+    async getOdds(eventId, homeTeam = null, awayTeam = null) {
+        // Si tenemos datos de equipos, generar cuotas más precisas
+        if (homeTeam && awayTeam && typeof footballDataService !== 'undefined') {
+            console.log('📊 Generating odds based on team statistics');
+            return footballDataService.generateOddsFromTeamStats(homeTeam, awayTeam);
+        }
+
+        // Fallback a cuotas simuladas
         return this.generateSimulatedOdds();
+    }
+
+    /**
+     * Verificar estado de la API
+     */
+    async checkAPIStatus() {
+        if (typeof footballDataService !== 'undefined') {
+            const status = await footballDataService.checkAPIStatus();
+            console.log('📡 API Status:', status);
+            return status;
+        }
+        return {
+            status: 'unavailable',
+            message: 'Football-data.org service not loaded'
+        };
     }
 
     /**

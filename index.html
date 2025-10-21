@@ -428,8 +428,32 @@ Probabilidad Implícita = (1 / Cuota) × 100</pre>
 
     <!-- Scripts -->
     <script src="js/config.js"></script>
+    <script src="js/football-data-service.js"></script>
     <script src="js/api-service.js"></script>
     <script src="js/algorithms.js"></script>
     <script src="js/app.js"></script>
+
+    <!-- Inicializar y verificar API -->
+    <script>
+        // Verificar estado de la API al cargar
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (typeof footballDataService !== 'undefined') {
+                const status = await footballDataService.checkAPIStatus();
+                console.log('🔴 Football-data.org Status:', status);
+
+                // Mostrar estado en la UI
+                const liveIndicator = document.querySelector('.live-indicator span:last-child');
+                if (liveIndicator) {
+                    if (status.status === 'active') {
+                        liveIndicator.innerHTML = '🔴 EN VIVO - Football-data.org';
+                        liveIndicator.style.color = 'var(--accent-success)';
+                    } else {
+                        liveIndicator.innerHTML = '⚠️ Modo Simulado';
+                        liveIndicator.style.color = 'var(--accent-warning)';
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>

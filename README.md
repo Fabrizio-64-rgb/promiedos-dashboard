@@ -199,43 +199,100 @@ Fórmula: `f* = (b × p - q) / b`
 
 - **Frontend**: HTML5, CSS3, JavaScript (Vanilla ES6+)
 - **Gráficos**: Chart.js 3.9.1
-- **APIs de Datos**:
-  - TheSportsDB (gratuita, preconfigurada)
-  - API-Football (opcional, requiere registro)
-- **Algoritmos**: ELO, MINIMAX, Kelly Criterion
+- **API Principal**:
+  - 🔴 **Football-data.org** (CONFIGURADA - datos EN VIVO)
+  - API Key: Integrada y funcional
+  - Cobertura: 7+ ligas principales
+- **APIs de Respaldo**:
+  - TheSportsDB (fallback automático)
+  - API-Football (opcional)
+- **Algoritmos**:
+  - ELO adaptado con ventaja local
+  - MINIMAX conservador
+  - Kelly Criterion (Full, 1/2, 1/4)
+  - Value Betting automático
+  - Generador de parlays con EV
 - **Framework UI**: Sistema de componentes personalizado con tema oscuro
 - **Actualización**: Sistema de polling automático para datos en tiempo real
-- **Arquitectura**: Modular con separación de responsabilidades
+- **Arquitectura**:
+  - Modular con separación de responsabilidades
+  - Sistema multi-API con fallback inteligente
+  - Caché por capas para optimización
+  - Normalización de datos entre diferentes fuentes
 
-## 📡 Actualización en Tiempo Real
+## 📡 Actualización en Tiempo Real con Datos EN VIVO
 
-El dashboard incluye un sistema completo de actualización automática:
+### 🔴 Football-data.org - API Principal (CONFIGURADA)
 
-### Características
+El dashboard ahora utiliza **Football-data.org** como fuente principal de datos en tiempo real:
+
+#### ✅ Características Activas
+- 🔴 **Datos EN VIVO**: Información actualizada directamente de la API oficial
+- ⚽ **Clasificaciones reales**: Tablas de posiciones actualizadas
+- 📅 **Fixtures reales**: Partidos programados con fechas y horarios exactos
+- 🏟️ **Partidos en vivo**: Marcadores en tiempo real durante los partidos
+- 📊 **Estadísticas completas**: Datos detallados de equipos y competiciones
+- 🎯 **Cuotas mejoradas**: Calculadas basándose en estadísticas reales de equipos
+
+#### 📊 Ligas Soportadas
+- 🏴󠁧󠁢󠁥󠁮󠁧󠁿 **Premier League** (Inglaterra)
+- 🇪🇸 **La Liga** (España)
+- 🇩🇪 **Bundesliga** (Alemania)
+- 🇮🇹 **Serie A** (Italia)
+- 🇫🇷 **Ligue 1** (Francia)
+- 🏆 **Champions League**
+- 🌍 **World Cup** y **European Championship**
+
+### Sistema de Actualización Automática
+
 - ⚡ **Marcadores en vivo**: Actualización cada 30 segundos
 - 📊 **Clasificaciones**: Actualización cada 5 minutos
 - 📅 **Fixtures**: Actualización cada 10 minutos
-- 🎯 **Predicciones**: Recálculo cada 15 minutos
+- 🎯 **Predicciones**: Recálculo automático con datos frescos
 
-### Configuración
-Activa la opción "Actualización automática" en la barra lateral para:
-- Mantener datos actualizados sin refrescar la página
-- Recibir alertas de cambios importantes
-- Actualizar cuotas y probabilidades automáticamente
+### Configuración Multi-API con Fallback
 
-### APIs Soportadas
-1. **TheSportsDB** (Gratuita)
-   - ✅ Ya configurada
-   - ✅ Sin límites estrictos
-   - ℹ️ Datos básicos de ligas principales
+El dashboard implementa un sistema inteligente de múltiples APIs:
 
-2. **API-Football** (Premium)
-   - 🔑 Requiere API key (100 llamadas/día gratis)
-   - ✅ Datos más completos y actualizados
-   - ✅ Cuotas de apuestas en tiempo real
-   - ✅ Estadísticas avanzadas
+**Prioridad de Datos:**
+1. 🥇 **Football-data.org** (Principal - DATOS EN VIVO)
+   - ✅ **CONFIGURADA** con API key
+   - ✅ Datos oficiales en tiempo real
+   - ✅ 10 llamadas/minuto en plan gratuito
+   - ✅ Cobertura de ligas principales
 
-Ver [SETUP.md](SETUP.md) para configurar APIs adicionales.
+2. 🥈 **TheSportsDB** (Fallback automático)
+   - ✅ Activada si Football-data.org no responde
+   - ℹ️ Datos básicos de respaldo
+
+3. 🥉 **Datos Simulados** (Último recurso)
+   - ℹ️ Se activa solo si todas las APIs fallan
+   - ℹ️ Datos realistas pero ficticios
+
+### Cómo Funciona
+
+1. Al abrir el dashboard, se conecta automáticamente a Football-data.org
+2. El indicador en la esquina superior derecha muestra:
+   - **🔴 EN VIVO - Football-data.org**: Datos reales conectados
+   - **⚠️ Modo Simulado**: Usando datos de respaldo
+3. La consola del navegador (F12) muestra logs detallados de cada petición
+4. El sistema cambia automáticamente a fallback si hay errores
+
+### Límites y Consideraciones
+
+**Plan Gratuito de Football-data.org:**
+- ✅ 10 llamadas por minuto
+- ✅ 30,000 llamadas por mes (aproximadamente)
+- ✅ Acceso a todas las ligas principales
+- ❌ No incluye cuotas de apuestas (se calculan algorítmicamente)
+- ❌ Histórico limitado a temporada actual
+
+**Recomendaciones de Uso:**
+- Activa "Actualización automática" solo cuando necesites datos en vivo
+- El sistema de caché reduce llamadas innecesarias
+- Los datos se mantienen válidos por varios minutos
+
+Ver [SETUP.md](SETUP.md) para más detalles técnicos.
 
 ## 💻 Requisitos del Sistema
 

@@ -5,7 +5,7 @@
 
 class DashboardApp {
     constructor() {
-        this.currentLeague = CONFIG.DEFAULT_LEAGUES.PREMIER_LEAGUE;
+        this.currentLeague = CONFIG.DEFAULT_LEAGUES.PREMIER_LEAGUE; // 'PL' para Football-data.org
         this.selectedHomeTeam = null;
         this.selectedAwayTeam = null;
         this.standings = [];
@@ -14,6 +14,7 @@ class DashboardApp {
         this.autoUpdateEnabled = false;
         this.currentTab = 'dashboard';
         this.historicalResults = this.loadHistoricalResults();
+        this.dataSource = 'unknown'; // Rastrear fuente de datos actual
 
         this.init();
     }
@@ -159,8 +160,8 @@ class DashboardApp {
         this.showLoading();
 
         try {
-            // Obtener cuotas
-            const odds = await apiService.getOdds();
+            // Obtener cuotas mejoradas basadas en estadísticas de equipos
+            const odds = await apiService.getOdds(null, this.selectedHomeTeam, this.selectedAwayTeam);
 
             // Calcular predicciones
             const eloPrediction = PredictionAlgorithms.calculateELO(
