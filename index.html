@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dashboard profesional para análisis y predicción de apuestas deportivas con datos en tiempo real">
+    <title>Promiedos Dashboard Pro - Análisis de Apuestas Deportivas</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Chart.js para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Barra lateral -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>⚽ Promiedos</h1>
+                <p>Dashboard Pro</p>
+            </div>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active" data-tab="dashboard">
+                            <span class="nav-icon">📊</span>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="predictions">
+                            <span class="nav-icon">🎯</span>
+                            Predicción
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="trends">
+                            <span class="nav-icon">📈</span>
+                            Tendencias
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="recommendations">
+                            <span class="nav-icon">💡</span>
+                            Recomendaciones
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="valueBetting">
+                            <span class="nav-icon">💰</span>
+                            Value Betting
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="goalsAnalysis">
+                            <span class="nav-icon">⚽</span>
+                            Análisis de Goles
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="marginals">
+                            <span class="nav-icon">📉</span>
+                            Marginales
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="parlays">
+                            <span class="nav-icon">🎲</span>
+                            Sugeridor de Parlays
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="riskDashboard">
+                            <span class="nav-icon">⚖️</span>
+                            Dashboard de Riesgo
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="alerts">
+                            <span class="nav-icon">🚨</span>
+                            Alertas
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="fixtures">
+                            <span class="nav-icon">📅</span>
+                            Próximos Partidos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="help">
+                            <span class="nav-icon">❓</span>
+                            Ayuda
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div style="padding: var(--spacing-lg); border-top: 1px solid var(--border-color);">
+                <label style="display: flex; align-items: center; cursor: pointer; color: var(--text-secondary); font-size: 0.875rem;">
+                    <input type="checkbox" id="autoUpdate" style="margin-right: var(--spacing-sm);">
+                    Actualización automática
+                </label>
+            </div>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="main-content" id="mainContent">
+            <!-- Barra superior -->
+            <header class="top-bar">
+                <div class="top-bar-left">
+                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+                    <div class="top-bar-title">
+                        <h2>Promiedos Dashboard Pro</h2>
+                    </div>
+                </div>
+                <div class="top-bar-right">
+                    <div class="live-indicator">
+                        <div class="live-dot"></div>
+                        <span>En vivo</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Panel de control -->
+            <section class="control-panel">
+                <div class="team-selectors">
+                    <div class="selector-group">
+                        <label for="homeTeam">Equipo Local</label>
+                        <select id="homeTeam" class="team-select">
+                            <option value="">Cargando equipos...</option>
+                        </select>
+                    </div>
+
+                    <div class="selector-group">
+                        <label for="awayTeam">Equipo Visitante</label>
+                        <select id="awayTeam" class="team-select">
+                            <option value="">Cargando equipos...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="analyzeBtn">
+                        <span>🔍</span>
+                        Analizar Partido
+                    </button>
+                    <button class="btn btn-secondary" id="downloadCSV">
+                        <span>📥</span>
+                        Descargar CSV
+                    </button>
+                </div>
+            </section>
+
+            <!-- Área de contenido con pestañas -->
+            <div class="content-area">
+                <!-- Loading spinner -->
+                <div id="loading" class="hidden">
+                    <div class="spinner"></div>
+                </div>
+
+                <!-- Dashboard Tab -->
+                <div id="dashboard" class="tab-content active">
+                    <h2 style="margin-bottom: var(--spacing-lg);">Dashboard Principal</h2>
+
+                    <!-- Estadísticas rápidas -->
+                    <div class="cards-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Líder de la Liga</div>
+                            <div class="stat-value" id="leaderTeam">-</div>
+                            <div class="stat-change positive">
+                                <span id="leaderPoints">- pts</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-label">Total de Goles</div>
+                            <div class="stat-value" id="totalGoals">-</div>
+                            <div class="stat-change">En la temporada</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-label">Partidos Jugados</div>
+                            <div class="stat-value" id="totalMatches">-</div>
+                            <div class="stat-change">Total acumulado</div>
+                        </div>
+                    </div>
+
+                    <!-- Tabla de clasificación -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Clasificación de la Liga</h3>
+                            <span class="badge-info card-badge">Actualizado</span>
+                        </div>
+                        <div id="standingsTable">
+                            <!-- Tabla generada dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Predictions Tab -->
+                <div id="predictions" class="tab-content">
+                    <h2 style="margin-bottom: var(--spacing-lg);">Predicciones del Partido</h2>
+                    <div id="predictionsContent">
+                        <div class="alert alert-info">
+                            <div class="alert-icon">ℹ️</div>
+                            <div class="alert-content">
+                                <div class="alert-title">Selecciona los equipos</div>
+                                <div class="alert-message">Por favor selecciona el equipo local y visitante para ver las predicciones.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trends Tab -->
+                <div id="trends" class="tab-content">
+                    <h2 style="margin-bottom: var(--spacing-lg);">Tendencias y Forma</h2>
+                    <div id="trendsContent">
+                        <div class="alert alert-info">
+                            <div class="alert-icon">ℹ️</div>
+                            <div class="alert-content">
+                                <div class="alert-title">Selecciona los equipos</div>
+                                <div class="alert-message">Por favor selecciona el equipo local y visitante para ver las tendencias.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendations Tab -->
+                <div id="recommendations" class="tab-content">
+                    <h2 style="margin-bottom: var(--spacing-lg);">Recomendaciones de Apuestas</h2>
+                    <div id="recommendationsContent">
+                        <div class="alert alert-info">
+                            <div class="alert-icon">ℹ️</div>
+                            <div class="alert-content">
+                                <div class="alert-title">Selecciona los equipos</div>
+                                <div class="alert-message">Por favor selecciona el equipo local y visitante para ver las recomendaciones.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Value Betting Tab -->
+                <div id="valueBetting" class="tab-content">
+                    <h2 style="margin-bottom: var(--spacing-lg);">Value Betting</h2>
+                    <div id="valueBettingContent">
+                        <div class="alert alert-info">
+                            <div class="alert-icon">ℹ️</div>
+                            <div class="alert-content">
+                                <div class="alert-title">Selecciona los equipos</div>
+                                <div class="alert-message">Por favor selecciona el equipo local y visitante para encontrar oportunidades de valor.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Goals Analysis Tab -->
+                <div id="goalsAnalysis" class="tab-content">
+                    <h2 style="margin-bottom: var(--spacing-lg);">Análisis de Goles</h2>
+                    <div id="goalsAnalysisContent">
+                        <div class="alert alert-info">
+                            <div class="alert-icon">ℹ️</div>
+                            <div class="alert-content">
+                                <div class="alert-title">Selecciona los equipos</div>
+                                <div class="alert-message">Por favor selecciona el equipo local y visitante para ver el análisis de goles.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Marginals Tab -->
+                <div id="marginals" class="tab-content">
+                    <h2 style="margin-bottom: var(--spacing-lg);">Análisis Marginal</h2>
+                    <div id="marginalsContent">
+                        <div class="alert alert-info">
+                            <div class="alert-icon">ℹ️</div>
+                            <div class="alert-content">
+                                <div class="alert-title">Selecciona los equipos</div>
+                                <div class="alert-message">Por favor selecciona el equipo local y visitante para ver el análisis marginal.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Parlays Tab -->
+                <div id="parlays" class="tab-content">
+                    <h2 style="margin-bottom: var(--spacing-lg);">Sugeridor de Parlays</h2>
+                    <div id="parlaysContent">
+                        <div class="alert alert-info">
+                            <div class="alert-icon">ℹ️</div>
+                            <div class="alert-content">
+                                <div class="alert-title">Selecciona los equipos</div>
+                                <div class="alert-message">Por favor selecciona el equipo local y visitante para ver sugerencias de parlays.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Risk Dashboard Tab -->
+                <div id="riskDashboard" class="tab-content">
+                    <h2 style="margin-bottom: var(--spacing-lg);">Dashboard de Riesgo (Kelly Criterion)</h2>
+                    <div id="riskDashboardContent">
+                        <div class="alert alert-info">
+                            <div class="alert-icon">ℹ️</div>
+                            <div class="alert-content">
+                                <div class="alert-title">Selecciona los equipos</div>
+                                <div class="alert-message">Por favor selecciona el equipo local y visitante para calcular el dimensionamiento óptimo de apuestas.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alerts Tab -->
+                <div id="alerts" class="tab-content">
+                    <h2 style="margin-bottom: var(--spacing-lg);">Centro de Alertas</h2>
+                    <div id="alertsContent">
+                        <div class="alert alert-success">
+                            <div class="alert-icon">✅</div>
+                            <div class="alert-content">
+                                <div class="alert-title">Sin alertas activas</div>
+                                <div class="alert-message">No hay anomalías detectadas en este momento.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fixtures Tab -->
+                <div id="fixtures" class="tab-content">
+                    <h2 style="margin-bottom: var(--spacing-lg);">Próximos Partidos</h2>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Calendario de Fixtures</h3>
+                            <span class="badge-info card-badge">Próximos 10 partidos</span>
+                        </div>
+                        <div id="fixturesTable">
+                            <!-- Tabla generada dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Help Tab -->
+                <div id="help" class="tab-content">
+                    <h2 style="margin-bottom: var(--spacing-lg);">Ayuda y Documentación</h2>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Guía de Uso</h3>
+                        </div>
+                        <div style="line-height: 1.8;">
+                            <h4 style="margin-bottom: var(--spacing-md); color: var(--accent-primary);">Inicio Rápido</h4>
+                            <ol style="margin-left: var(--spacing-lg); margin-bottom: var(--spacing-lg);">
+                                <li>Selecciona el equipo <strong>local</strong> y <strong>visitante</strong> en los desplegables superiores</li>
+                                <li>Haz clic en <strong>"Analizar Partido"</strong> para generar predicciones</li>
+                                <li>Navega por las pestañas para ver diferentes análisis</li>
+                                <li>Revisa las <strong>Recomendaciones</strong> para apuestas sugeridas</li>
+                                <li>Usa el <strong>Dashboard de Riesgo</strong> para dimensionamiento óptimo</li>
+                            </ol>
+
+                            <h4 style="margin-bottom: var(--spacing-md); color: var(--accent-primary);">Algoritmos</h4>
+                            <p style="margin-bottom: var(--spacing-md);"><strong>ELO:</strong> Calcula probabilidades basándose en rating ELO adaptado al fútbol. Más confiable para equipos con historial estable.</p>
+                            <p style="margin-bottom: var(--spacing-md);"><strong>MINIMAX:</strong> Enfoque conservador que pondera victorias recientes más que promedios históricos.</p>
+
+                            <h4 style="margin-bottom: var(--spacing-md); color: var(--accent-primary);">Kelly Criterion</h4>
+                            <p style="margin-bottom: var(--spacing-md);">Fórmula matemática para determinar el porcentaje óptimo del bankroll a apostar:</p>
+                            <pre style="background-color: var(--bg-tertiary); padding: var(--spacing-md); border-radius: 8px; overflow-x: auto;">f* = (b × p - q) / b
+
+Donde:
+- f* = fracción del bankroll
+- p = probabilidad de ganar
+- q = 1 - p
+- b = cuota - 1</pre>
+                            <p style="margin-bottom: var(--spacing-md);"><strong>Recomendación:</strong> Usa 1/2 Kelly o 1/4 Kelly para gestión más conservadora.</p>
+
+                            <h4 style="margin-bottom: var(--spacing-md); color: var(--accent-primary);">Value Betting</h4>
+                            <p style="margin-bottom: var(--spacing-md);">Una apuesta tiene valor cuando la probabilidad real es mayor que la implícita en las cuotas:</p>
+                            <pre style="background-color: var(--bg-tertiary); padding: var(--spacing-md); border-radius: 8px; overflow-x: auto;">Valor % = Probabilidad Real - Probabilidad Implícita
+Probabilidad Implícita = (1 / Cuota) × 100</pre>
+
+                            <h4 style="margin-bottom: var(--spacing-md); color: var(--accent-primary);">Actualización en Tiempo Real</h4>
+                            <p style="margin-bottom: var(--spacing-md);">Activa la opción "Actualización automática" en la barra lateral para:</p>
+                            <ul style="margin-left: var(--spacing-lg); margin-bottom: var(--spacing-lg);">
+                                <li>Actualizar clasificaciones cada 5 minutos</li>
+                                <li>Actualizar fixtures cada 10 minutos</li>
+                                <li>Actualizar marcadores en vivo cada 30 segundos</li>
+                            </ul>
+
+                            <h4 style="margin-bottom: var(--spacing-md); color: var(--accent-primary);">Avisos Importantes</h4>
+                            <div class="alert alert-warning">
+                                <div class="alert-icon">⚠️</div>
+                                <div class="alert-content">
+                                    <div class="alert-title">Uso Responsable</div>
+                                    <div class="alert-message">
+                                        <ul style="margin-left: var(--spacing-lg); margin-top: var(--spacing-sm);">
+                                            <li>Este dashboard es una herramienta educativa y de análisis</li>
+                                            <li>Las predicciones son estimaciones probabilísticas, no certezas</li>
+                                            <li>Nunca apuestes más de lo que puedas permitirte perder</li>
+                                            <li>Usa siempre Kelly Criterion o una fracción del mismo</li>
+                                            <li>Verifica alertas y noticias antes de realizar apuestas</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Configuración de API</h3>
+                        </div>
+                        <div style="line-height: 1.8;">
+                            <p style="margin-bottom: var(--spacing-md);">
+                                El dashboard utiliza datos en tiempo real de TheSportsDB (gratuito).
+                                Para datos más completos y actualizados, puedes configurar tu propia API key en el archivo <code>js/config.js</code>.
+                            </p>
+                            <h4 style="margin-bottom: var(--spacing-md); color: var(--accent-primary);">APIs Soportadas</h4>
+                            <ul style="margin-left: var(--spacing-lg);">
+                                <li><strong>TheSportsDB:</strong> API gratuita (ya configurada)</li>
+                                <li><strong>API-Football:</strong> Datos más completos (requiere registro en api-football.com)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/api-service.js"></script>
+    <script src="js/algorithms.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

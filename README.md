@@ -118,12 +118,36 @@ Promiedos Dashboard Pro es una plataforma de nivel profesional que analiza parti
 ## 🚀 Cómo Usar
 
 ### Inicio Rápido
+
+#### Opción 1: Abrir Directamente
+```bash
+# Simplemente abre index.html en tu navegador
+open index.html  # Mac/Linux
+start index.html # Windows
+```
+
+#### Opción 2: Servidor Local (Recomendado)
+```bash
+# Con Python
+python -m http.server 8000
+
+# Con Node.js
+npx http-server -p 8000
+
+# Luego abre: http://localhost:8000
+```
+
+### Uso del Dashboard
 1. Abre el dashboard en un navegador web moderno
 2. Selecciona equipo local (LOCAL) y equipo visitante (VISITANTE)
-3. Navega por las pestañas para analizar el partido
-4. Revisa la recomendación de mejor apuesta
-5. Verifica el Kelly Criterion para dimensionamiento óptimo
-6. Comprueba alertas de anomalías antes de apostar
+3. Haz clic en "Analizar Partido" para generar predicciones
+4. Navega por las pestañas para ver diferentes análisis
+5. Revisa la recomendación de mejor apuesta
+6. Verifica el Kelly Criterion para dimensionamiento óptimo
+7. Comprueba alertas de anomalías antes de apostar
+8. Activa "Actualización automática" para datos en tiempo real
+
+📖 **Para más detalles, consulta [SETUP.md](SETUP.md)**
 
 ### Flujo de Trabajo Ejemplo
 1. **Dashboard** → Revisa clasificación y estadísticas de equipos
@@ -173,12 +197,45 @@ Fórmula: `f* = (b × p - q) / b`
 
 ## 🛠️ Tecnologías Utilizadas
 
-- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
+- **Frontend**: HTML5, CSS3, JavaScript (Vanilla ES6+)
 - **Gráficos**: Chart.js 3.9.1
-- **Datos**: Estadísticas de fútbol realistas simuladas
+- **APIs de Datos**:
+  - TheSportsDB (gratuita, preconfigurada)
+  - API-Football (opcional, requiere registro)
 - **Algoritmos**: ELO, MINIMAX, Kelly Criterion
 - **Framework UI**: Sistema de componentes personalizado con tema oscuro
-- **Fuente de Datos**: Integración lista para API de TheSportsDB
+- **Actualización**: Sistema de polling automático para datos en tiempo real
+- **Arquitectura**: Modular con separación de responsabilidades
+
+## 📡 Actualización en Tiempo Real
+
+El dashboard incluye un sistema completo de actualización automática:
+
+### Características
+- ⚡ **Marcadores en vivo**: Actualización cada 30 segundos
+- 📊 **Clasificaciones**: Actualización cada 5 minutos
+- 📅 **Fixtures**: Actualización cada 10 minutos
+- 🎯 **Predicciones**: Recálculo cada 15 minutos
+
+### Configuración
+Activa la opción "Actualización automática" en la barra lateral para:
+- Mantener datos actualizados sin refrescar la página
+- Recibir alertas de cambios importantes
+- Actualizar cuotas y probabilidades automáticamente
+
+### APIs Soportadas
+1. **TheSportsDB** (Gratuita)
+   - ✅ Ya configurada
+   - ✅ Sin límites estrictos
+   - ℹ️ Datos básicos de ligas principales
+
+2. **API-Football** (Premium)
+   - 🔑 Requiere API key (100 llamadas/día gratis)
+   - ✅ Datos más completos y actualizados
+   - ✅ Cuotas de apuestas en tiempo real
+   - ✅ Estadísticas avanzadas
+
+Ver [SETUP.md](SETUP.md) para configurar APIs adicionales.
 
 ## 💻 Requisitos del Sistema
 
@@ -187,35 +244,65 @@ Fórmula: `f* = (b × p - q) / b`
 - No requiere servidor backend (se ejecuta localmente)
 - Aproximadamente 2MB de espacio en disco para la aplicación
 
-## 📁 Estructura de Archivo
-
-El dashboard está diseñado como una aplicación de una sola página (SPA) con la siguiente estructura:
+## 📁 Estructura del Proyecto
 
 ```
-index.html (o promiedos_dashboard.html)
-├── HEAD
-│   ├── Meta etiquetas
-│   ├── Librería Chart.js
-│   └── Estilos CSS
-├── BODY
-│   ├── Navegación de barra lateral
-│   ├── Barra de navegación con título
-│   ├── Panel de control
-│   ├── Pestañas de contenido
-│   │   ├── Dashboard
-│   │   ├── Predicción
-│   │   ├── Tendencias
-│   │   ├── Recomendaciones
-│   │   ├── Value Betting
-│   │   ├── Análisis de Goles
-│   │   ├── Marginales
-│   │   ├── Sugeridor de Parlays
-│   │   ├── Dashboard de Riesgo
-│   │   ├── Alertas
-│   │   ├── Ayuda
-│   │   └── Próximos Partidos
-│   └── Lógica JavaScript
+promiedos-dashboard/
+├── index.html                  # Aplicación principal (SPA)
+├── README.md                   # Documentación principal
+├── SETUP.md                    # Guía de configuración detallada
+├── .gitignore                  # Archivos ignorados por Git
+├── css/
+│   └── styles.css              # Estilos completos del dashboard
+├── js/
+│   ├── config.js               # Configuración y constantes
+│   ├── api-service.js          # Servicio de APIs de fútbol
+│   ├── algorithms.js           # Algoritmos ELO, MINIMAX, Kelly
+│   └── app.js                  # Lógica principal de la aplicación
+└── assets/                     # Recursos adicionales (opcional)
+
 ```
+
+### Arquitectura de Componentes
+
+**index.html**: Estructura y navegación
+- ✅ 12 pestañas funcionales
+- ✅ Barra lateral con navegación
+- ✅ Panel de control de equipos
+- ✅ Sistema de tabs dinámico
+
+**css/styles.css**: Sistema de diseño
+- ✅ Tema oscuro profesional
+- ✅ Variables CSS personalizables
+- ✅ Diseño responsive
+- ✅ Animaciones y transiciones
+
+**js/config.js**: Configuración central
+- ✅ APIs configurables
+- ✅ Intervalos de actualización
+- ✅ Parámetros de algoritmos
+- ✅ Configuración de bankroll
+
+**js/api-service.js**: Servicio de datos
+- ✅ Integración con TheSportsDB
+- ✅ Soporte para API-Football
+- ✅ Sistema de caché inteligente
+- ✅ Actualización automática
+
+**js/algorithms.js**: Lógica predictiva
+- ✅ Algoritmo ELO adaptado
+- ✅ Algoritmo MINIMAX conservador
+- ✅ Kelly Criterion
+- ✅ Value Betting
+- ✅ Análisis de goles y marginales
+- ✅ Generador de parlays
+- ✅ Sistema de alertas
+
+**js/app.js**: Aplicación principal
+- ✅ Gestión de estado
+- ✅ Renderizado dinámico
+- ✅ Event handlers
+- ✅ Actualización en tiempo real
 
 ## ⚙️ Configuración
 
