@@ -118,7 +118,7 @@ Promiedos Dashboard Pro es una plataforma de nivel profesional que analiza parti
 ## 🚀 Cómo Usar
 
 ### Inicio Rápido
-1. Abre el archivo HTML en un navegador web moderno
+1. Abre el dashboard en un navegador web moderno
 2. Selecciona equipo local (LOCAL) y equipo visitante (VISITANTE)
 3. Navega por las pestañas para analizar el partido
 4. Revisa la recomendación de mejor apuesta
@@ -145,7 +145,7 @@ Promiedos Dashboard Pro es una plataforma de nivel profesional que analiza parti
 
 ### Kelly Criterion
 Fórmula: `f* = (b × p - q) / b`
-- **f*** = fracción óptima del bankroll a apostar
+- **f\*** = fracción óptima del bankroll a apostar
 - **p** = probabilidad de ganar
 - **q** = 1 - p (probabilidad de perder)
 - **b** = cuota - 1
@@ -185,12 +185,14 @@ Fórmula: `f* = (b × p - q) / b`
 - Navegador web moderno (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+)
 - JavaScript habilitado
 - No requiere servidor backend (se ejecuta localmente)
-- Aproximadamente 2MB de espacio en disco para archivo HTML
+- Aproximadamente 2MB de espacio en disco para la aplicación
 
 ## 📁 Estructura de Archivo
 
+El dashboard está diseñado como una aplicación de una sola página (SPA) con la siguiente estructura:
+
 ```
-promiedos_dark_dashboard4.html
+index.html (o promiedos_dashboard.html)
 ├── HEAD
 │   ├── Meta etiquetas
 │   ├── Librería Chart.js
